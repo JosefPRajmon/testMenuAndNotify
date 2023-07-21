@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="testMenu.Views.AboutPage"
+             xmlns:vm="clr-namespace:testMenu.ViewModels"
+             Title="{Binding Title}">
+    
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid Padding="20">
+        <AbsoluteLayout>
+            <Button IsEnabled="False" BackgroundColor="Red" Padding="6,6,80,6" WidthRequest="300" AbsoluteLayout.LayoutBounds="0,40" TextColor="Black" Text="tohle je testasfgdgda" CornerRadius="10"/>
+            <Image Source="znak_jind_hradec_m.png" AbsoluteLayout.LayoutBounds="200,0,80,80"/>
+        </AbsoluteLayout>
+
+    </Grid>
+
+</ContentPage>

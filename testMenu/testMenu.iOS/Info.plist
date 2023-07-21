@@ -38,9 +38,11 @@
 	</array>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<string>No</string>
-	<key>CFBundleVersion</key>
-	<string>17</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1</string>
+	<string>2</string>
+	<key>UIMainStoryboardFile</key>
+	<string>LaunchScreen</string>
+	<key>CFBundleVersion</key>
+	<string>21</string>
 </dict>
 </plist>

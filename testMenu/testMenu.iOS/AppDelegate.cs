@@ -28,6 +28,14 @@ namespace testMenu.iOS
 
             //Firebase.Core.App.Configure();
             FirebasePushNotificationManager.Initialize(options, true);
+            if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
+            {
+                var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
+                    UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
+                    new NSSet());
+
+                UIApplication.SharedApplication.RegisterUserNotificationSettings(notificationSettings);
+            }
 
             return base.FinishedLaunching(app, options);
         }

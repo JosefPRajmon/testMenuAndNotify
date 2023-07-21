@@ -17,7 +17,7 @@ namespace testMenu
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
 
-            CrossFirebasePushNotification.Current.Subscribe("general");
+            CrossFirebasePushNotification.Current.Subscribe("Praha11");
             CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             {
                 System.Diagnostics.Debug.WriteLine($"Data: {p.Data["myData"]}");

@@ -39,6 +39,8 @@
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<string>No</string>
 	<key>CFBundleVersion</key>
-	<string>1.1</string>
+	<string>17</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1</string>
 </dict>
 </plist>

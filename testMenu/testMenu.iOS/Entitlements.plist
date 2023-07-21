@@ -4,5 +4,7 @@
 <dict>
 	<key>Prostředí APS</key>
 	<string>development</string>
+	<key>aps-environment</key>
+	<string>development</string>
 </dict>
 </plist>

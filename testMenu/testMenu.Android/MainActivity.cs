@@ -24,14 +24,14 @@ namespace testMenu.Droid
 
             //tento kod je pro notifikace
             FirebasePushNotificationManager.ProcessIntent(this, Intent);
-            /*
+            
             const int requestLocationId = 0;
             string[] notiPermission = { Manifest.Permission.PostNotifications };
             if ((int)Build.VERSION.SdkInt < 33) return;
             if (this.CheckSelfPermission(Manifest.Permission.PostNotifications) != Permission.Granted)
             {
                 this.RequestPermissions(notiPermission, requestLocationId);
-            }*/
+            }
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

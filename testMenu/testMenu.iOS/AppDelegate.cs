@@ -26,7 +26,7 @@ namespace testMenu.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
-            Firebase.Core.App.Configure();
+            //Firebase.Core.App.Configure();
             FirebasePushNotificationManager.Initialize(options, true);
 
             return base.FinishedLaunching(app, options);

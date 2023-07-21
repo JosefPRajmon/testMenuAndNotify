@@ -18,6 +18,10 @@ namespace testMenu
             MainPage = new AppShell();
 
             CrossFirebasePushNotification.Current.Subscribe("general");
+            CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
+            {
+                System.Diagnostics.Debug.WriteLine($"Data: {p.Data["myData"]}");
+            };
 
             CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
             {

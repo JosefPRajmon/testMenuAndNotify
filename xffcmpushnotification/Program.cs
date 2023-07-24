@@ -47,26 +47,37 @@ class Program
 
     static async Task Main()
     {
-        var messageDto = new MessageDto
+        bool znovu = true;
+while (znovu)
         {
-            // Nastavte vlastnosti objektu messageDto
-            Topic = "Praha11",
-            Data = new System.Collections.Generic.Dictionary<string, string>
+            var messageDto = new MessageDto
+            {
+                // Nastavte vlastnosti objektu messageDto
+                Topic = "Praha11",
+                Data = new System.Collections.Generic.Dictionary<string, string>
             {
                 { "myData", "850" },
                 { "time", "2:45" },
             },
-            Title = "Hello WorldTest",
-            Body = "Ahoj tohle je test  Dělení notifikací"
-        };
+                Title = "Hello WorldTest",
+                Body = "Ahoj tohle je test  Dělení notifikací"
+            };
 
-        var json = JsonConvert.SerializeObject(messageDto);
-        var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var json = JsonConvert.SerializeObject(messageDto);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-        var url = "https://localhost:7040/api/Message/Post"; // Změňte na URL vašeho API
-        var response = await client.PostAsync(url, data);
+            var url = "https://localhost:7040/api/Message/Post"; // Změňte na URL vašeho API
+            var response = await client.PostAsync(url, data);
 
-        string result = response.Content.ReadAsStringAsync().Result;
-        Console.WriteLine(result);
+            string result = response.Content.ReadAsStringAsync().Result;
+            Console.WriteLine(result);
+
+            Console.WriteLine("Znovu? (y/n)");
+            string answer = $"{Console.ReadKey()}";
+            if (answer == "n")
+            {
+                znovu = false;
+            }
+        }
     }
 }

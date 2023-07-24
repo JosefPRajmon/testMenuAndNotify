@@ -13,20 +13,55 @@ namespace NotificationSenderApi.Controllers
 
             // Zde byste spustili vaši konzolovou aplikaci a předali jí data z messageDto
             // Například:
+            var topic = messageDto.Topic;
+            var data = messageDto.Data;
+            var title = messageDto.Title;
+            var body = messageDto.Body;
             var message = new Message()
             {
-                Topic = messageDto.Topic,
-                Data = messageDto.Data,
+                Topic = topic,
+                Data = data,
                 Notification = new Notification()
                 {
-                    Title = messageDto.Title,
-                    Body = messageDto.Body
+                    Title = title,
+                    Body = body
                 }
             };
 
             string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
+            var Allusers = MyDbContext.Instance;
+            Allusers.IsseterArray();
+            
+            foreach (var user in Allusers.Users(topic))
+            {
+                var messageIOS = new Message()
+                {
+                    Token = user,
+                    Data = data,
+                    Notification = new Notification()
+                    {
+                        Title = title,
+                        Body = body
+                    }
+                };
+            response = await FirebaseMessaging.DefaultInstance.SendAsync(messageIOS);
+            }
+            
             Console.WriteLine("Successfully sent message: " + response);
 
+            return Ok();
+        }
+       // [HttpPost("NewUser")]
+       /* public async Task<IActionResult> Post([FromBody] UserSaveDto userSaveDto )
+        {
+            Console.WriteLine("whereisproblm");
+            Console.WriteLine("New user: " + userSaveDto.Apk + " " + userSaveDto.Token);
+            return Ok();
+        }    */  [HttpPost("NewUser")]
+        public async Task<IActionResult> Get([FromBody] UserSaveDto userSaveDto )
+        {
+            Console.WriteLine("whereisproblm");
+            Console.WriteLine("New user: " + userSaveDto.Apk + " " + userSaveDto.Token);
             return Ok();
         }
     }

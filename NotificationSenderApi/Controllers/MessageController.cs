@@ -51,17 +51,12 @@ namespace NotificationSenderApi.Controllers
 
             return Ok();
         }
-       // [HttpPost("NewUser")]
-       /* public async Task<IActionResult> Post([FromBody] UserSaveDto userSaveDto )
-        {
-            Console.WriteLine("whereisproblm");
-            Console.WriteLine("New user: " + userSaveDto.Apk + " " + userSaveDto.Token);
-            return Ok();
-        }    */  [HttpPost("NewUser")]
+   
+       [HttpPost("NewUser")]
         public async Task<IActionResult> Get([FromBody] UserSaveDto userSaveDto )
         {
-            Console.WriteLine("whereisproblm");
-            Console.WriteLine("New user: " + userSaveDto.Apk + " " + userSaveDto.Token);
+            MyDbContext.Instance.AddUser(userSaveDto.Apk, userSaveDto.Token);
+
             return Ok();
         }
     }

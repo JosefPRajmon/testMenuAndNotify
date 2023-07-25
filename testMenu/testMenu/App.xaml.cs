@@ -13,11 +13,11 @@ namespace testMenu
 {
     public partial class App : Application
     {
-
+        string Url { get; set;}
         public App()
         {
             InitializeComponent();
-
+             Url = "https://172.18.32.1:7040";
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();        
 
@@ -32,7 +32,7 @@ namespace testMenu
 
             CrossFirebasePushNotification.Current.OnTokenRefresh += async (s, p) =>
             {
-                //var url = "https://172.18.32.1:7040/api/Message/NewUser";
+                //
 
 
 
@@ -42,9 +42,9 @@ namespace testMenu
                 var json = send;
                 var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var url = "https://172.18.32.1:7040/api/Message/NewUser";
+                var completUrl = Url + "/api/Message/NewUser";
 
-                var result = await client.PostAsync(url, data);
+                var result = await client.PostAsync(completUrl, data);
 
 
 
@@ -62,17 +62,6 @@ namespace testMenu
 
         protected override void OnResume()
         {
-        }
-        public void Sender()
-        {
-            HttpClient client = new HttpClient();
-
-            string send = "{\"apk\":\"" + "Praha11" + "\",\"token\":\"" + /*p.Token*/" test" + "\"}";
-            var json = send;
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var url = "https://localhost:7040/api/Message/NewUser"; // Změňte na URL vašeho API
-            var result = client.PostAsync(url, data);
         }
     }
 }

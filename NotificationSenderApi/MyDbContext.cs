@@ -143,7 +143,7 @@ namespace NotificationSenderApi
             }
         }
 
-        public void Add(string key, string value)
+        public void AddUser(string key, string value)
         {
             if (_databases.ContainsKey(key))
             {

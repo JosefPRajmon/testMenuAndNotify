@@ -11,45 +11,41 @@ namespace NotificationSenderApi.Controllers
         public async Task<IActionResult> Post([FromBody] MessageDto messageDto)
         {
 
-            // Zde byste spustili vaši konzolovou aplikaci a předali jí data z messageDto
-            // Například:
+
             var topic = messageDto.Topic;
             var data = messageDto.Data;
             var title = messageDto.Title;
             var body = messageDto.Body;
-            var message = new Message()
-            {
-                Topic = topic,
-                Data = data,
-                Notification = new Notification()
-                {
-                    Title = title,
-                    Body = body
-                }
-            };
 
-            string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
+
+            string response = "";
             var Allusers = MyDbContext.Instance;
             Allusers.IsseterArray();
-            
-            foreach (var user in Allusers.Users(topic))
+            if (Allusers.Users(topic).Count>0)
             {
-                var messageIOS = new Message()
-                {
-                    Token = user,
-                    Data = data,
-                    Notification = new Notification()
-                    {
-                        Title = title,
-                        Body = body
-                    }
-                };
-            response = await FirebaseMessaging.DefaultInstance.SendAsync(messageIOS);
-            }
-            
-            Console.WriteLine("Successfully sent message: " + response);
 
-            return Ok();
+                foreach (var user in Allusers.Users(topic))
+                {
+                    var messageIOS = new Message()
+                    {
+                        Token = user,
+                        Data = data,
+                        Notification = new Notification()
+                        {
+                            Title = title,
+                            Body = body
+                        }
+                    };
+                    response = await FirebaseMessaging.DefaultInstance.SendAsync(messageIOS);
+                }
+
+                Console.WriteLine("Successfully sent message: " + response);
+
+                return Ok();
+            }else
+            {
+                return BadRequest();
+            }
         }
    
        [HttpPost("NewUser")]
